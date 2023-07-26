@@ -16,26 +16,26 @@
       <div class="col-4">
         <div>
           <form>
-            <label for="city-input" class="h3">Search for a City:</label>
+            <label for="city-input" class="h2">Search for a City:</label>
             <input type="text" id="city-input" />
-            <button type="button" class="btn btn-primary">Search</button>
+            <button type="button" class="btn btn-primary" id="search-button">Search</button>
           </form>
         </div>
         <hr />
-        <div class="previous-searches"></div>
+        <div class="search-history"></div>
       </div>
       <seciton class="container">
-        <div class="current-weather"></div>
         <div>
-          <p>5-day Forecast:</p>
-          <div class="card"></div>
-          <div class="card"></div>
-          <div class="card"></div>
-          <div class="card"></div>
-          <div class="card"></div>
+          <div id="current-title"></div>
+          <div id="current-weather"></div>
+        </div>
+        <div>
+          <h3>5-day Forecast:</h3>
+          <div id="5-day-forecast"></div>
         </div>
     </section>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
