@@ -1,4 +1,64 @@
 header {
     background-image: linear-gradient(to right, #475AB8, #261361);
     color: white;
+    height: 60px;
+    padding-top: 8px;
+    margin-bottom: 5px;
+}
+h1 {
+    font-size: 35px;
+    font-weight: bold;
+    
+}
+h2 {
+    font-size: 30px;
+    font-weight: bold;
+}
+.search-bar {
+    margin: 5px;
+}
+.button {
+    width: 100%;
+    color: black;
+    background-color: #AEAEAE;
+    border: none;
+    border-radius: 5px;
+    margin: 8px 0;
+    padding: 5px;
+}
+.search {
+    color: white;
+    background-color: #6A91E3;
+}
+input {
+    width: 100%;
+    margin-bottom: 3px;
+}
+h3 {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px 0 5px;
+}
+p {
+    font-size: 18px;
+}
+.current-card {
+    width: 100%;
+    border: black 1px solid;
+    margin: 5px 0;
+    padding: 5px;
+}
+h4 {
+    font-size: 22px;
+    font-weight: bold;
+}
+.forecast-cards {
+    display: flex;
+    justify-content: space-evenly;
+}
+.demo-card {
+    background-color: #323D4F;
+    color: white;
+    width: 18%;
+    padding: 5px;
 }

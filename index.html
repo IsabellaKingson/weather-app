@@ -11,30 +11,68 @@
     <title>Weather Dashboard</title>
   </head>
   <body>
-    <header class="col-12"><h1>Weather Dashboard</h1></header>
-    <main class="container row">
-      <div class="col-4">
+    <header class="col-12"><h1 class="col-4 offset-6">Weather Dashboard</h1></header>
+    <main class="row">
+      <div class="col-3 search-bar">
         <div>
-          <form>
-            <label for="city-input" class="h2">Search for a City:</label>
-            <input type="text" id="city-input" />
-            <button type="button" class="btn btn-primary" id="search-button">Search</button>
-          </form>
+            <label for="city-input" class="h2"><h2>Search for a City:</h2></label>
+            <input type="text" id="city-input"/>
+            <button type="button" class="search button" id="search-button">Search</button>
         </div>
-        <hr />
-        <div class="search-history"></div>
+        <hr>
+        <div class="search-history">
+          <button type="button" class="button">Atlanta</button>
+          <button type="button" class="button">Denver</button>
+        </div>
       </div>
-      <seciton class="container">
-        <div>
-          <div id="current-title"></div>
-          <div id="current-weather"></div>
+      <section class="col-8">
+        <div class="current-card">
+          <div id="current-title">
+            <h2>Atlanta (9/13/2022)</h2>
+          </div>
+          <div id="current-weather">
+            <p>temp: 76.62 F</p>
+            <p>Wind: 8.43 MPH</p>
+            <p>Humidity: 44 %</p>
+          </div>
         </div>
         <div>
-          <h3>5-day Forecast:</h3>
-          <div id="5-day-forecast"></div>
+          <h3>5-Day Forecast:</h3>
+          <div id="5-day-forecast" class="forecast-cards row">
+            <div class="demo-card">
+              <h4>9/14/2022</h4>
+              <p>Temp: 63.55 F</p>
+              <p>Wind: 3.94 MPH</p>
+              <p>Humidity: 63 %</p>
+            </div>
+            <div class="demo-card">
+              <h4>9/14/2022</h4>
+              <p>Temp: 63.55 F</p>
+              <p>Wind: 3.94 MPH</p>
+              <p>Humidity: 63 %</p>
+            </div>
+            <div class="demo-card">
+              <h4>9/14/2022</h4>
+              <p>Temp: 63.55 F</p>
+              <p>Wind: 3.94 MPH</p>
+              <p>Humidity: 63 %</p>
+            </div>
+            <div class="demo-card">
+              <h4>9/14/2022</h4>
+              <p>Temp: 63.55 F</p>
+              <p>Wind: 3.94 MPH</p>
+              <p>Humidity: 63 %</p>
+            </div>
+            <div class="demo-card">
+              <h4>9/14/2022</h4>
+              <p>Temp: 63.55 F</p>
+              <p>Wind: 3.94 MPH</p>
+              <p>Humidity: 63 %</p>
+            </div>
         </div>
     </section>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
