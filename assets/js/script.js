@@ -11,7 +11,7 @@ function getForecast(cityName) {
   localStorage.setItem('historyObj', JSON.stringify(historyObj));
   // Take city name from input or search history and get the geocode
   let cityInfoUrl =
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    "https://api.openweathermap.org/geo/1.0/direct?q=" +
     cityName +
     "&appid=274d0f6297d38202f126189dee0ef293";
   fetch(cityInfoUrl)
