@@ -8,10 +8,10 @@ let historyObj = {};
 function getForecast(cityName) {
   // Add city name to local storage
   historyObj[cityName] = cityName;
-  localStorage.setItem('historyObj', JSON.stringify(historyObj));
+  localStorage.setItem("historyObj", JSON.stringify(historyObj));
   // Take city name from input or search history and get the geocode
   let cityInfoUrl =
-    "https://api.openweathermap.org/geo/1.0/direct?q=" +
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
     cityName +
     "&appid=274d0f6297d38202f126189dee0ef293";
   fetch(cityInfoUrl)
@@ -21,8 +21,8 @@ function getForecast(cityName) {
     })
     .then(function (data) {
       // Get the longitude and latitude values and insert them into the request URL
-      let lat = data[0].lat;
-      let lon = data[0].lon;
+      let lat = data.coord.lat;
+      let lon = data.coord.lon;
       let requestForecastUrl =
         "https://api.openweathermap.org/data/3.0/onecall?lat=" +
         lat +
@@ -63,9 +63,9 @@ const todaysWeather = function (data, cityName) {
   currentImg.setAttribute("src", currentIcon);
   currentSearchTitle.textContent =
     cityName + " " + dayjs.unix(currentDate).format("MM/DD/YYYY");
-  temp.textContent = "Temp: " + currentTemp + '°F';
-  wind.textContent = "Wind: " + currentWind + ' MPH';
-  humidity.textContent = "Humidity: " + currentHumidity + '%';
+  temp.textContent = "Temp: " + currentTemp + "°F";
+  wind.textContent = "Wind: " + currentWind + " MPH";
+  humidity.textContent = "Humidity: " + currentHumidity + "%";
   currentConditions.append(temp, wind, humidity);
   currentSearchTitle.append(currentImg);
   currentTitle.append(currentSearchTitle);
@@ -96,35 +96,35 @@ const dailyWeather = function (data) {
     dateEl.textContent = dayjs.unix(dateInfo).format("MM/DD/YYYY");
     iconEl.setAttribute("src", iconInfo);
     tempEl.textContent = "Temp: " + tempInfo + "°F";
-    windEl.textContent = "Wind: " + windInfo + ' MPH';
-    humidityEl.textContent = "Humidity: " + humidityInfo + '%';
+    windEl.textContent = "Wind: " + windInfo + " MPH";
+    humidityEl.textContent = "Humidity: " + humidityInfo + "%";
     forecastCard.append(dateEl, iconEl, tempEl, windEl, humidityEl);
-    forecastCard.setAttribute('class', 'custom-card');
+    forecastCard.setAttribute("class", "custom-card");
     // Add elements to the page
     dailyForecast.append(forecastCard);
   }
   return;
 };
 const printHistory = function () {
-let history = JSON.parse(localStorage.getItem('historyObj'));
-if (history !== null){
-  for(const property in history) {
-    let buttonEl = document.createElement('button');
-    buttonEl.setAttribute('class', 'button');
-    buttonEl.textContent = history[property];
-    searchHistory.append(buttonEl);
+  let history = JSON.parse(localStorage.getItem("historyObj"));
+  if (history !== null) {
+    for (const property in history) {
+      let buttonEl = document.createElement("button");
+      buttonEl.setAttribute("class", "button");
+      buttonEl.textContent = history[property];
+      searchHistory.append(buttonEl);
+    }
+    return;
   }
-  return;
-}
 };
 printHistory();
-searchHistory.addEventListener('click', (event) => {
+searchHistory.addEventListener("click", (event) => {
   let clicked = event.target;
   let cityName = clicked.textContent;
   getForecast(cityName);
-})
+});
 searchBtn.addEventListener("click", () => {
   let cityInput = document.getElementById("city-input").value;
   getForecast(cityInput);
-  document.getElementById('city-input').value = "";
+  document.getElementById("city-input").value = "";
 });
