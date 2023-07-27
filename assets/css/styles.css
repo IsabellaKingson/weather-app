@@ -56,7 +56,7 @@ h4 {
     display: flex;
     justify-content: space-evenly;
 }
-.demo-card {
+.custom-card {
     background-color: #323D4F;
     color: white;
     width: 18%;

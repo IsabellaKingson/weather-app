@@ -4,9 +4,11 @@ const currentTitle = document.getElementById("current-title");
 const currentWeather = document.getElementById("current-weather");
 const dailyForecast = document.getElementById("5-day-forecast");
 const searchHistory = document.getElementById("search-history");
+let historyObj = {};
 function getForecast(cityName) {
-  // Add city name to history storage and add to local storage
-
+  // Add city name to local storage
+  historyObj[cityName] = cityName;
+  localStorage.setItem('historyObj', JSON.stringify(historyObj));
   // Take city name from input or search history and get the geocode
   let cityInfoUrl =
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
@@ -34,18 +36,13 @@ function getForecast(cityName) {
         })
         .then(function (data) {
           // Run functions to append data to page
-          console.log(data);
-          todaysWeather(data);
+          todaysWeather(data, cityName);
           dailyWeather(data);
         });
     });
 }
-searchBtn.addEventListener("click", () => {
-  let cityInput = document.getElementById("city-input").value;
-  getForecast(cityInput);
-});
 
-const todaysWeather = function (data) {
+const todaysWeather = function (data, cityName) {
   // Create elements to append todays weather information to
   let currentSearchTitle = document.createElement("h2");
   let currentImg = document.createElement("img");
@@ -65,15 +62,16 @@ const todaysWeather = function (data) {
   // Add data from variables to created elements
   currentImg.setAttribute("src", currentIcon);
   currentSearchTitle.textContent =
-    city + " " + dayjs.unix(currentDate).format("MM/DD/YYYY");
-  temp.textContent = "Temp: " + currentTemp;
-  wind.textContent = "Wind: " + currentWind;
-  humidity.textContent = "Humidity: " + currentHumidity;
+    cityName + " " + dayjs.unix(currentDate).format("MM/DD/YYYY");
+  temp.textContent = "Temp: " + currentTemp + '°F';
+  wind.textContent = "Wind: " + currentWind + ' MPH';
+  humidity.textContent = "Humidity: " + currentHumidity + '%';
   currentConditions.append(temp, wind, humidity);
   currentSearchTitle.append(currentImg);
   currentTitle.append(currentSearchTitle);
   // Add elements to the page
   currentWeather.append(currentConditions);
+  return;
 };
 const dailyWeather = function (data) {
   // Create cards for the next 5 days' weather data
@@ -97,11 +95,36 @@ const dailyWeather = function (data) {
     // Add data from variables to created elements
     dateEl.textContent = dayjs.unix(dateInfo).format("MM/DD/YYYY");
     iconEl.setAttribute("src", iconInfo);
-    tempEl.textContent = "Temp: " + tempInfo;
-    windEl.textContent = "Wind: " + windInfo;
-    humidityEl.textContent = "Humidity: " + humidityInfo;
+    tempEl.textContent = "Temp: " + tempInfo + "°F";
+    windEl.textContent = "Wind: " + windInfo + ' MPH';
+    humidityEl.textContent = "Humidity: " + humidityInfo + '%';
     forecastCard.append(dateEl, iconEl, tempEl, windEl, humidityEl);
+    forecastCard.setAttribute('class', 'custom-card');
     // Add elements to the page
     dailyForecast.append(forecastCard);
   }
+  return;
 };
+const printHistory = function () {
+let history = JSON.parse(localStorage.getItem('historyObj'));
+if (history !== null){
+  for(const property in history) {
+    let buttonEl = document.createElement('button');
+    buttonEl.setAttribute('class', 'button');
+    buttonEl.textContent = history[property];
+    searchHistory.append(buttonEl);
+  }
+  return;
+}
+};
+printHistory();
+searchHistory.addEventListener('click', (event) => {
+  let clicked = event.target;
+  let cityName = clicked.textContent;
+  getForecast(cityName);
+})
+searchBtn.addEventListener("click", () => {
+  let cityInput = document.getElementById("city-input").value;
+  getForecast(cityInput);
+  document.getElementById('city-input').value = "";
+});
